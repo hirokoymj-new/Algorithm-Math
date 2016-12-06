@@ -31,19 +31,15 @@ Check for a remainder when dividing by 1. If a remainder is 0, the value is Inte
 
 
 ```js
-var a = 2.1;
-var b = 3;
-
-function isInterger(a){
-	var flag = true;
-
-	if( (a%1)!==0 ){
-		flag = false;
+function isInt(a){
+	var flag = false;
+	if( (a%1) ==0 ){
+		flag = true;
 	}
 	return flag;
 }
-console.log(isInterger(a)); // true
-console.log(isInterger(b)); // false
+console.log(isInt(2.1)); // false
+console.log(isInt(3)); // true
 ```
 
 **Find a float in array.**
@@ -115,17 +111,18 @@ console.log(makeDigit2(-43, 5)); //00043
 ## Generate random int number from 5-7.
 
 ```js
+//// Returns a random number between min (inclusive) and max (exclusive)
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+console.log(getRandomInt(5,8));//generate random 5,6,7.
 ```
-console.log(getRandomInt(5,8));//5,6,7
+
 
 
 
 
 ## References:
 - [stackoverflow - How do I check that a number is float or integer?](http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer)
-- [Mozilla Developer Network - Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
+- [Mozilla Developer Network - Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)downw
