@@ -10,5 +10,5 @@ function isInt(a){
 	return flag;
 }
 
-console.log(isInt(1.5)); 
-console.log(isInt(824)); 
+console.log(isInt(1.5)); //false
+console.log(isInt(824)); //true
