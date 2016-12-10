@@ -126,3 +126,6 @@ console.log(getRandomInt(5,8));//generate random 5,6,7.
 ## References:
 - [stackoverflow - How do I check that a number is float or integer?](http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer)
 - [Mozilla Developer Network - Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)downw
+
+
+http://stackoverflow.com/questions/5581034/is-there-are-way-to-make-a-child-divs-width-wider-than-the-parent-div-using-css
