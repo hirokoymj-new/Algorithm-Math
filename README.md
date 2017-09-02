@@ -6,7 +6,7 @@
 3. [Round the nearest integare](#round-the-nearest-integare)
 4. [Is Integer?](#is-integer)
 5. [Making Digit](#making-digit)
-8. [Generate random int number from 5-7](#generate-random-int-number-from-5-7)
+8. [Generate random number]()
 
 
 ## Downward to the nearest integer
@@ -105,6 +105,8 @@ function makeDigit2(number, nth){
 }
 console.log(makeDigit2(-43, 5)); //00043
 ```
+
+## Random number
 **Q1: Generate random number 0-99**
 
 ```js
