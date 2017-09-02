@@ -162,6 +162,5 @@ Math.floor(5+Math.random()*3); //5-7
 
 ## References:
 - [stackoverflow - How do I check that a number is float or integer?](http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer)
-- [MDN Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)downw
-
+- [MDN - Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
 
