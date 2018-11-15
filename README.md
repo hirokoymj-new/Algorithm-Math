@@ -1,12 +1,16 @@
 # Algorithm - Math
 
 ## Table of contents
-1. [Downward to the nearest integer](#downward-to-the-nearest-integer)
-2. [Upward to the nearest integer](#upward-to-the-nearest-integer)
-3. [Round the nearest integare](#round-the-nearest-integare)
-4. [Is Integer?](#is-integer)
-5. [Making Digit](#making-digit)
-8. [Generate random number](#random-number)
+- [Algorithm - Math](#algorithm---math)
+  - [Table of contents](#table-of-contents)
+  - [Downward to the nearest integer](#downward-to-the-nearest-integer)
+  - [Upward to the nearest integer](#upward-to-the-nearest-integer)
+  - [Round the nearest integer](#round-the-nearest-integer)
+  - [Is Integer or float?](#is-integer-or-float)
+  - [Making Digit](#making-digit)
+  - [Find missing number and changes positive value](#find-missing-number-and-changes-positive-value)
+  - [Random number](#random-number)
+  - [References:](#references)
 
 
 ## Downward to the nearest integer
@@ -105,6 +109,44 @@ function makeDigit2(number, nth){
 }
 console.log(makeDigit2(-43, 5)); //00043
 ```
+
+## Find missing number and changes positive value
+>Write a function:
+class Solution { public int solution(int[] A); }
+that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
+For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5.
+Given A = [1, 2, 3], the function should return 4.
+Given A = [−1, −3], the function should return 1.
+
+
+```js
+//const array = [1, 3, 6, 4, 1]; //5
+const array = [1, 2, 4]; //4
+//const array = [-1,-3,5];
+
+function solution(array) {
+    array.sort((a,b)=>a-b);
+
+    let biggest = array[array.length-1];
+    let smallest = array[0];
+    let result = 0;
+    // find a smallest missing value in array
+    for(let i=smallest; i<=biggest; i++){
+      if(array.indexOf(i)===-1){
+        result = i;
+        break;
+      }
+    }
+    if(result === 0){ // No missing value
+      result = biggest+1;
+    }else if(result < 0){
+      result = 1;
+    }
+    return result;
+}
+solution(array);
+```
+
 
 ## Random number
 **Q1: Generate random number 0-99**
