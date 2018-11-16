@@ -1,16 +1,19 @@
-# Algorithm - Math
+# Math
 
-## Table of contents
-- [Algorithm - Math](#algorithm---math)
-  - [Table of contents](#table-of-contents)
+**Table of Contents**
+- [Math](#math)
   - [Downward to the nearest integer](#downward-to-the-nearest-integer)
   - [Upward to the nearest integer](#upward-to-the-nearest-integer)
   - [Round the nearest integer](#round-the-nearest-integer)
   - [Is Integer or float?](#is-integer-or-float)
   - [Making Digit](#making-digit)
-  - [Find missing number and changes positive value](#find-missing-number-and-changes-positive-value)
+  - [Find min/max number in Array](#find-minmax-number-in-array)
+  - [Finding missing number in Array](#finding-missing-number-in-array)
+  - [Find smallest missing number in array](#find-smallest-missing-number-in-array)
+  - [Sum of array](#sum-of-array)
   - [Random number](#random-number)
   - [References:](#references)
+
 
 
 ## Downward to the nearest integer
@@ -35,40 +38,48 @@ Check for a remainder when dividing by 1. If a remainder is 0, the value is Inte
 
 
 ```js
-function isInt(a){
-	var flag = false;
-	if( (a%1) ==0 ){
-		flag = true;
-	}
-	return flag;
+const isInt = (a) =>{
+  const remain = a%1;
+  const result = (remain === 0) ? true : false;
+  console.log(result);
 }
-console.log(isInt(2.1)); // false
-console.log(isInt(3)); // true
+isInt(5.3); //false
+isInt(2); //true
+isInt(2.1); // false
+isInt(3); // true
 ```
 
 **Find a float in array.**
 
-```
+```js
 var array = [3, 4.5, 2, 6.3];
 
 function findFloat(array){
 	var result = [];
-
 	array.forEach(function(value, index){
 		if((value%1) !== 0){
 			result.push(value);
 		}
 	});
-
 	return result;
-
 }
 
 var floatNum = findFloat(array);
 console.log(floatNum);//[ 4.5, 6.3 ]
 ```
 
-
+```js
+const findFloat = (array) =>{
+  const result = array.reduce((acc, value)=>{
+    const remain = value%1;
+    if(remain !== 0){
+      acc.push(value);
+    }
+    return acc;
+  },[]);
+  return result;
+}
+```
 
 ## Making Digit
 Creat a function to make digits. Given two arguments (number, nth) and if number is negative, it should conver to Interger. Example: findDigit(-43,5)); //00043
@@ -90,12 +101,22 @@ function makeDigit(number, nth){
 console.log(makeDigit(-43,5));　//00043
 ```
 
+```js
+const findDigit = (num, nth) =>{
+  let digitNum = Math.abs(num) + Math.pow(10,nth);
+
+  const numArray = digitNum.toString().split('');
+  numArray.splice(0,1);
+  const result = numArray.join('');
+  console.log(result);
+}
+findDigit(-43,5, 5); //00043
+```
 
 1. If you don't know Math.abs() to convert negative number, it multiply by -1. Example: ``-43x-1 = 43``
 
 ```js
 function makeDigit2(number, nth){
-
 	number = number * -1;
 	var sum = 1;
 	for(var i=0; i<nth; i++){
@@ -110,42 +131,104 @@ function makeDigit2(number, nth){
 console.log(makeDigit2(-43, 5)); //00043
 ```
 
-## Find missing number and changes positive value
+## Find min/max number in Array
+- There is no max/min function in Array so we will try to use Math.max function.
+- Math.max function: **`Math.max(value1, value2, value3)`**.
+- Invoking a Function with a Function Method using `call()` or `apply()`, which are predefined JavaScript **function methods**.
+
+| Methods  | Definition                | Syntax                                 |
+|----------|---------------------------|--------------------------------------- |
+| call()   | Function.prototype.call() |function.call(thisArg, arg1, arg2, arg3) |
+| apply()  | Function.prototype.apply()|function.apply(thisArg, array)           |
+
+
+```js
+var array = [2,5,6,9];
+var max = Math.max.apply(null, array); //9
+var min = Math.min.apply(null, array); //2
+```
+
+## Finding missing number in Array
+1. Find max value.
+2. Find min value.
+3. Preparing missing[].
+4. while loop.
+5. Using indexOf() to search/find a missing value. **`Array.prototype.indexOf()`**
+6. Add a missing value in missing[].
+
+```js
+var myArray = [5, 2, 6, 1, 3]; //4
+
+const findMissing = (array) =>{
+  let max = Math.max.apply(null, array);
+  let min = Math.min.apply(null, array);
+  const result = []
+
+  for(let i=min; i<max+1; i++){
+    if(array.indexOf(i)===-1){
+      result.push(i);
+    }
+  }
+	return result;
+}
+console.log(findMissing(myArray)); //[4]
+```
+
+
+
+## Find smallest missing number in array
 >Write a function:
-class Solution { public int solution(int[] A); }
-that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
+Given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
 For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5.
 Given A = [1, 2, 3], the function should return 4.
 Given A = [−1, −3], the function should return 1.
 
+**break vs return**
+> break is used when you want to exit from the loop, 
+while return is used to go back to the step where 
+it was called or to stop further execution.
+
 
 ```js
-//const array = [1, 3, 6, 4, 1]; //5
-const array = [1, 2, 4]; //4
-//const array = [-1,-3,5];
+//const array = [1, 3, 6, 4, 1, 2]; //5
+//const array = [1, 2, 3]; //4
+const array = [-1,-3]; //1
 
 function solution(array) {
-    array.sort((a,b)=>a-b);
-
-    let biggest = array[array.length-1];
-    let smallest = array[0];
+    let max = Math.max.apply(null, array);
+    let min = Math.min.apply(null, array);
     let result = 0;
-    // find a smallest missing value in array
-    for(let i=smallest; i<=biggest; i++){
+
+    // find a smallest missing value
+    for(let i=min; i<=max; i++){
       if(array.indexOf(i)===-1){
         result = i;
         break;
       }
     }
     if(result === 0){ // No missing value
-      result = biggest+1;
-    }else if(result < 0){
+      result = max+1;
+    }else if(result < 0){ // if result is negative value
       result = 1;
     }
     return result;
 }
-solution(array);
+console.log(solution(array));
 ```
+
+## Sum of array
+```js
+const myArray = [3,5,2];
+const sum = (array) =>{
+  const result = array.reduce((acc, value)=>{
+    acc = acc + value;
+    return acc;
+  },0);
+  console.log(result);
+}
+sum(myArray); //10
+```
+
 
 
 ## Random number
