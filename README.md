@@ -54,32 +54,18 @@ isInt(3); // true
 ```js
 var array = [3, 4.5, 2, 6.3];
 
-function findFloat(array){
-	var result = [];
-	array.forEach(function(value, index){
-		if((value%1) !== 0){
-			result.push(value);
-		}
-	});
-	return result;
-}
+const array = [3, 4.5, 2, 6.3];
+const result = array.filter((v) => {
+  if (v % 1 > 0) {
+    return v;
+  }
+});
 
-var floatNum = findFloat(array);
-console.log(floatNum);//[ 4.5, 6.3 ]
+console.log(result);
+// [ 4.5, 6.3 ]
 ```
 
-```js
-const findFloat = (array) =>{
-  const result = array.reduce((acc, value)=>{
-    const remain = value%1;
-    if(remain !== 0){
-      acc.push(value);
-    }
-    return acc;
-  },[]);
-  return result;
-}
-```
+
 
 ## Making Digit
 Creat a function to make digits. Given two arguments (number, nth) and if number is negative, it should conver to Interger. Example: findDigit(-43,5)); //00043
